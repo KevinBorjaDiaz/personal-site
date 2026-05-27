@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Hero from "../../components/sections/Hero.astro"
+import Experience from "../../components/sections/Experience.astro"
+import Skills from "../../components/sections/Skills.astro"
+import Certifications from "../../components/sections/Certifications.astro"
+import AboutMe from "../../components/sections/AboutMe.astro"
+
+import { en, es } from "../../Resources";
+import type { Language } from "../../types/language.type";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
+const lang = Astro.params.lang as Language;
+const translations = { es, en };
+const t = translations[lang];
+---
+
+<BaseLayout lang={lang} t={t}>
+  <Hero t={t}/>
+  <div class="sectionContainer">
+    <Experience id="experience" t={t} />
+    <Skills id="skills" t={t} />
+    <Certifications id="certifications" t={t} />
+    <AboutMe id="aboutMe" t={t} />
+  </div>
+</BaseLayout>
+
+<style>
+  .sectionContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+</style>

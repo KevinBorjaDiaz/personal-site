@@ -1,0 +1,68 @@
+---
+import type { Certificate } from '../../types/language.type'
+const { t } = Astro.props;
+---
+<section id="certifications">
+    <div class="container">
+        <h1> {t.certifications.title} </h1>
+        <div class="gridContainer columns2">
+            {t.certifications.certificationList.map((cert: Certificate) => (
+                <div>
+                    <a href={cert.file} target="_blank" class="cert-card">
+                        <h3>{cert.title}</h3>
+                        <p>{cert.description}</p>
+                    </a>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+
+<style>
+    .cert-card {
+        display: block;
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        padding: 1rem;
+        background: var(--surface);
+        text-decoration: none;
+        color: var(--text);
+        transition: all 0.2s ease;
+    }
+
+    .cert-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-3px);
+    }
+
+    .cert-card h3 {
+        margin: 0;
+        font-size: var(--fs-md);
+    }
+
+    .cert-card p {
+        margin-top: 0.5rem;
+        font-size: var(--fs-sm);
+        color: var(--link);
+    }
+
+    .cert-card::after {
+        content: "↗";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 0.8rem;
+        color: var(--link);
+    }
+
+    .cert-card:nth-child(-n+3) {
+        /* border-color: var(--accent); */
+    }
+
+    h1 { 
+        color: var(--highlight);
+    }
+
+    
+</style>

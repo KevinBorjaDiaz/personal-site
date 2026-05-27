@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "./node_modules/.bin/astro dev",
+      "name": "Development server",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    // { // DEV SERVER DEBUGGER
+    //   "type": "chrome",
+    //   "request": "launch",
+    //   "name": "Astro: Debug",
+    //   "url": "http://localhost:4321",
+    //   "webRoot": "${workspaceFolder}",
+    //   "sourceMaps": true
+    // },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Astro: Brave",
+      "url": "http://localhost:4321",
+      "webRoot": "${workspaceFolder}",
+      "runtimeExecutable": "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
+    }
+  ]
+}

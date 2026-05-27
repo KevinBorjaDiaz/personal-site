@@ -1,0 +1,57 @@
+---
+const { t } = Astro.props;
+---
+
+<section class="hero" id="home">
+    <h1 class="hero-title">Kevin Borja</h1>
+    <h1 class="hero-subtitle">{t.hero.SoftwareDeveloper}</h1>
+    <p class="hero-text">{t.hero.FullStackDev}</p>
+
+    <div class="hero-actions">
+        <a href="https://github.com/KevinBorjaDiaz" target="_blank" class="btn btn-primary">GitHub</a>
+        <a href="https://www.linkedin.com/in/kevinborjadiaz/" target="_blank" class="btn btn-primary">LinkedIn</a>
+    </div>
+</section>
+
+<style>
+    .hero {
+        text-align: center;
+        background: var(--surface);
+        padding-bottom: 3rem;
+    }
+
+    .hero-title {
+        font-size: var(--fs-3xl);
+        color: var(--hero-title);
+        margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: var(--fs-2xl);
+        margin-top: 1rem;
+    }
+
+    .hero-text {
+        font-size: var(--fs-lg);
+        color: var(--link);
+    }
+
+    .hero-actions {
+        margin-top: 2rem;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: var(--fs-2xl);
+        }
+
+        .hero-subtitle {
+            font-size: var(--fs-xl);
+        }
+    }
+
+
+</style>

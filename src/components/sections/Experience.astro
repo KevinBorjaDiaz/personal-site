@@ -1,0 +1,121 @@
+---
+const { t } = Astro.props;
+---
+
+<section id="experience">
+    <div class="container">  
+        <h1> {t.experience.title} </h1>
+        <div class="gridContainer columns2">
+            
+            <div class="cellRight">
+                <svg class="icon">
+                    <use href="#calendar"></use>
+                </svg>
+            </div>
+            <div class="cellLeft">
+                <div class="job-header">
+                    <h3>{t.experience.spark.role} - </h3>
+                    <span class="job-title">{t.experience.spark.company}</span>
+                </div>
+            </div>
+            
+            <div class="cellRight line"></div>
+            <div class="cellLeft">
+                <p class="date">{t.experience.spark.date}</p>
+                
+                <ul>
+                    {t.experience.spark.bullets.map( (item: string )=> (
+                        <li>{item}</li>
+                    ))}
+                </ul>
+            </div>
+        
+            <div class="cellRight">
+                <svg class="icon">
+                    <use href="#calendar"></use>
+                </svg>
+            </div>
+            <div class="cellLeft">
+                <div class="job-header">
+                    <h3>{t.experience.sukarne.role} - </h3>
+                    <span class="job-title">{t.experience.sukarne.company}</span>
+                </div>
+            </div>
+
+            <div class="cellRight line"></div>
+            <div class="cellLeft">
+                <p class="date">{t.experience.sukarne.date}</p>
+                
+                <ul>
+                    {t.experience.sukarne.bullets.map( (item: string) => (
+                        <li>{item}</li>
+                    ))}
+                </ul>
+            </div>
+
+        <div>  <!-----  GRID END ----->
+    </div>
+</section>
+
+
+<style>
+    h1 {
+        color: var(--highlight)
+    }
+
+    h3 {
+        margin: 0;
+        font-size: var(--fs-lg);
+    }
+
+    ul{
+        padding-left: 1rem;
+    }
+
+    ul li{
+        list-style: none;
+        margin-bottom: 0.3rem;
+        padding-bottom: 10px;
+    }
+
+    .job-title{
+        color: var(--job-title);
+        align-self: self-end;
+    }
+
+    .line{
+        width: 2px;
+        height: 100%;
+        padding-bottom: 30px;
+        background-color: var(--border-subtle);
+        justify-self: center;
+    }
+
+    .cellRight{
+        text-align: center;
+    }
+
+    .date{
+        font-size: var(--fs-sm);
+        color: var(--link);
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+        color: var(--link);
+        text-align: center;
+    }
+
+    .job-header {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+        .line, .icon{
+            display: none
+        }
+    }
+</style>

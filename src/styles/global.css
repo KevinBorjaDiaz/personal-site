@@ -1,0 +1,155 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #161618;
+    --surface: #1b1e1d;
+    --text: #ffffff;
+    --subtitle: #cdcdcd;
+    --link: #a3a3a3;
+    --accent: #12538F;
+    --accent-hover: #0f477a;
+    --hero-title: #6ec500;
+    --overlay-bg: rgba(0, 0, 0, 0.4);
+    --border-subtle: rgba(255, 255, 255, 0.3);
+    --highlight: #75acff;
+    --job-title: #f1b98b;
+
+    --font-main: 'Inter', system-ui, sans-serif;
+    --fs-xs: 0.8rem;
+    --fs-sm: 0.9rem;
+    --fs-md: 1rem;
+    --fs-lg: 1.3rem;
+    --fs-xl: 2rem;
+    --fs-2xl: 3rem;
+    --fs-3xl: 4rem;
+}
+
+[data-theme="light"] {
+    --bg: #f7f7f8;
+    --surface: #ffffff;
+    --text: #1a1a1a;
+    --subtitle: #3c3c3c;
+    --link: #555555;
+
+    --accent-hover: #0f477a;
+    --hero-title: #000000;
+    --overlay-bg: rgba(215, 215, 215, 0.6);
+    --border-subtle: rgba(0, 0, 0, 0.3);
+    --highlight: var(--accent);
+    --job-title: #975621;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-main);
+}
+
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-size: var(--fs-md);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--accent, #12538F);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+.btn-secondary:hover {
+    background: var(--accent);
+    color: white;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.d-flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.d-flex.column{
+    flex-direction: column;
+}
+
+.gridContainer {
+    display: grid;
+    gap: 5px 10px;
+    justify-content: stretch;
+    align-items: center;
+}
+
+.gridContainer.columns2 {
+    grid-template-columns: auto auto;
+}
+
+.gridContainer .cellLeft {
+    text-align: left;
+}
+
+.gridContainer .cellRight {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.gridContainer .span2{
+    column-span: 2;
+}
+
+.container-narrow {
+  max-width: 700px;
+}
+
+.container-wide {
+  max-width: 1100px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+section {
+    padding: 3rem 1rem 0 1rem;
+    width: 100%
+}
+
+@media (max-width: 768px) {
+    #theme-toggle-wrapper > div{
+        position: absolute;
+        right: 22px;
+        margin-top: 47px;
+    }
+
+    .gridContainer.columns2 {
+        grid-template-columns: auto;
+    }
+}

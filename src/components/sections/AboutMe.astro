@@ -1,0 +1,59 @@
+---
+const { t } = Astro.props;
+---
+<section id="aboutMe">
+    <div class="container">
+        <h1 class="aboutTitle"> {t.aboutMe.title} </h1>
+        <div class="gridContainer columns2">
+            <div class="bordered">
+                <h2> Kevin Borja Diaz </h2>
+                <div>
+                    {t.aboutMe.introduction.map((line: string) => (
+                        <p class="description">{line}</p>
+                    ))}
+                </div>
+            </div>
+            <div class="card">
+                <h2>{t.aboutMe.career.title}</h2>
+                <p class="description">{t.aboutMe.career.description}</p>
+                <span class="careerDate">{t.aboutMe.career.date}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    
+    .aboutTitle {
+        color: var(--highlight)
+    }
+
+    .bordered, .card {
+        display: block;
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        padding: 1rem;
+        height: 100%
+    }
+    
+    .card {
+        background: var(--surface);
+        text-decoration: none;
+        color: var(--text);
+        transition: all 0.2s ease;
+    }
+
+    .careerDate {
+        font-size: var(--fs-sm);
+        color: var(--link);
+    }
+
+    .description {
+        font-size: var(--fs-md);
+        color: var(--subtitle);
+    }
+
+    section {
+        padding-bottom: 2rem;   
+    }
+</style>
