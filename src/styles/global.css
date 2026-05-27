@@ -3,6 +3,9 @@
 }
 
 :root {
+    --bs-danger-text-emphasis: #58151c;
+    --bs-danger-bg-subtle: #f8d7da;
+    --bs-danger-border-subtle: #f1aeb5;
     --bg: #161618;
     --surface: #1b1e1d;
     --text: #ffffff;
@@ -76,13 +79,19 @@ a {
 
 .btn-secondary {
     background: transparent;
-    border: 1px solid var(--accent);
-    color: var(--accent);
+    color: var(--text);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    transition: border-color 0.2 ease, background-color 0.2 ease, transform 0.15s ease;
 }
 
 .btn-secondary:hover {
-    background: var(--accent);
-    color: white;
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--surface) 85%, white 10%);
+}
+
+.btn-secondary:active {
+    transform: scale(0.97);
 }
 
 .text-center{
@@ -97,6 +106,10 @@ a {
 
 .d-flex.column{
     flex-direction: column;
+}
+
+.gap-2{
+    gap: 2rem;
 }
 
 .gridContainer {
@@ -151,5 +164,9 @@ section {
 
     .gridContainer.columns2 {
         grid-template-columns: auto;
+    }
+
+    .d-flex {
+        flex-direction: column;
     }
 }

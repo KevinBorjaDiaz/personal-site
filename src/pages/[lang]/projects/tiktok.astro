@@ -10,45 +10,49 @@ export async function getStaticPaths() {
 const lang = Astro.params.lang as Language;
 const t = { en, es }[lang];
 ---
-
 <BaseLayout lang={lang} t={t}>
-  <a href={`/${lang}/projects`} class="back-btn">← Back</a>
-  <section class="container">
-    <div id="error" class="error hidden"></div>
 
-    <form id="form">
-      <input
+  <div class="d-flex column container">
+    <div id="error" class="error hidden errorBanner"></div>
+    
+    <div class="d-flex gap-2 end">
+      <a href={`/${lang}/projects`} class="back-btn">← {t.projects.back}</a>
+
+        <input
         type="text"
-        placeholder="Insert TikTok URL"
+        placeholder={t.projects.tiktok.placeholder}
         id="tiktokURL"
         autocomplete="off"
-      />
-      <button type="submit">Go</button>
-    </form>
+        />
 
+      <button id="goBtn" type="button" class="btn btn-secondary">{t.projects.tiktok.search}</button>
+    </div>
+    
     <blockquote>
       <iframe
         id="iframe"
         width="100%"
         height="575"
-        frameborder="0"
         allowfullscreen
         class="hidden"></iframe>
-
-      <button id="copyBtn" class="btn hidden">Copy URL</button>
-
-      <a id="goLink" target="_blank" class="hidden">
-        <button class="btn">Go to URL</button>
-      </a>
     </blockquote>
-  </section>
+      
+
+
+    <div class="d-flex column btnDiv">
+      <button id="copyBtn" class="hidden btn btn-secondary bigbtn">{t.projects.tiktok.copyUrl}</button>
+      <a id="goLink" target="_blank" class="hidden bigbtn">
+        <button class="btn btn-secondary bigbtn">{t.projects.tiktok.goToUrl}</button>
+      </a>
+    </div>  
+  </div>
 </BaseLayout>
 
 <script>
   
   const el = {
     input: document.getElementById("tiktokURL") as HTMLInputElement,
-    form: document.getElementById("form") as HTMLElement,
+    goBtn: document.getElementById("goBtn") as HTMLButtonElement,
     iframe: document.getElementById("iframe") as HTMLIFrameElement,
     error: document.getElementById("error") as HTMLElement,
     copyBtn: document.getElementById("copyBtn") as HTMLButtonElement,
@@ -57,8 +61,7 @@ const t = { en, es }[lang];
 
   let strURL: string | null = null;
 
-  el.form.addEventListener("submit", async (e: Event) => {
-    e.preventDefault();
+  el.goBtn.addEventListener("click", async () => {
     const text = el.input.value.trim();
     const resolved = await callApiForMobileURL(text);
     validateText(resolved);
@@ -133,18 +136,41 @@ const t = { en, es }[lang];
 </script>
 
 <style>
-  .container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
 
   .hidden {
     display: none;
   }
 
   .error {
-    color: red;
+    color: var(--bs-danger-text-emphasis);
+  }
+
+  .bigbtn, .btnDiv {
+    width: 100%;
+  }
+
+  #goBtn {
+    padding:0.1rem 1.5rem;
+  }
+
+  .end {
+    align-items: flex-end;
+  }
+
+  .errorBanner{
+    background-color: var(--bs-danger-bg-subtle);
+    border: 1px solid var(--bs-danger-border-subtle);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.375rem;
+    width: 100%;
+    font-family: var(--font-main);
+    font-size: var(--fs-md)
+  }
+
+  @media (max-width: 768px) {
+    .end {
+        align-items: flex-start;
+    }
   }
 </style>

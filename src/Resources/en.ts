@@ -143,5 +143,30 @@ export const en = {
       description: "Bioengineer degree from Universidad Autonoma de Baja California (UABC)",
       date: "Graduated on April 30, 2021"
     }
+  },
+  projects: {
+    back: "Back",
+    tiktok: {
+      goToUrl: "Go To Url",
+      copyUrl: "Copy URL",
+      search: "Search",
+      placeholder: "Insert TikTok URL"
+    },
+    timer: {
+      start: "Start",
+      stop: "Stop",
+      phase1: "Phase 1",
+      phase2: "Phase 2",
+      offset: "Offset",
+      counter: "Counter",
+      cycles: "Cycles",
+      waiting: "Waiting..."
+    },
+    wordle: {
+      language: "Language",
+      english: "English",
+      spanish: "Spanish",
+      length: "Length"
+    }
   }
 };

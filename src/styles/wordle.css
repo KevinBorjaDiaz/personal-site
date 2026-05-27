@@ -1,0 +1,73 @@
+
+.error {
+    color: var(--bs-danger-text-emphasis);
+}
+
+.back-btn{
+    width: 100%;
+    text-align: left;
+}
+
+.correct{
+    background-color: rgb(28, 126, 28);
+}
+
+.present{
+    background-color: rgb(233, 212, 28);
+}
+
+.absent{
+    background-color: rgb(135, 160, 183);
+}
+
+.alphabetRow{
+    width: 100%;
+    gap: clamp(0px, 15px, 0.3vw);
+}
+
+#keyboard {
+    width: 100%;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.alphabetCell{
+    width: clamp(0px, 10%, 40px);
+    height: 40px;
+    font-size: clamp(12px, 0.2rem, 24px);
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.wordCell{
+    height: clamp(35px, 8vw, 50px);
+    width: clamp(35px, 8vw, 50px);
+    margin: clamp(0px, 5px, 0.2em);
+    border: solid var(--text) 1px;
+    align-content: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#enterButton{
+    min-width: 80px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px;
+}
+
+@media (max-width: 768px) {
+    
+    .d-flex {
+        flex-direction: row;
+    }
+
+}

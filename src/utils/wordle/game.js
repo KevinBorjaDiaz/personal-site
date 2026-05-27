@@ -193,47 +193,35 @@ export function createGame(config) {
     function render() {
         // grid
         el.game.innerHTML = guesses
-            .map(
-                (row) => `
-      <div class="row">
-        ${row
-                        .map(
-                            (cell) => `
-          <div class="cell ${cell.status}">
-            ${cell.letter}
-          </div>
-        `,
-                        )
-                        .join("")}
-      </div>
-    `,
-            )
-            .join("");
+            .map( (row) => `
+                <div class="d-flex">
+                    ${row.map( (cell) => `
+                        <div class="wordCell ${cell.status}">
+                            <strong>${cell.letter}</strong>
+                        </div>`,).join("")}
+                </div>`,)
+        .join("");
 
         // error
         el.error.textContent = errorMessage;
 
         // keyboard
         const renderRow = (letters) =>
-            letters
-                .map(
-                    (l) => `
-        <button class="key ${alphabetMap[l] || ""}" data-key="${l}">
-          ${l}
-        </button>
-      `,
-                )
-                .join("");
+            letters.map( (l) => `
+                <button class="alphabetCell d-flex btn btn-secondary ${alphabetMap[l] || ""}" data-key="${l}">
+                    ${l}
+                </button>
+            `,).join("");
 
         el.keyboard.innerHTML = `
-      <div>${renderRow(lettersRow1)}</div>
-      <div>${renderRow(lettersRow2)} ${language === "ES" ? `<button data-key="Ñ">Ñ</button>` : ""}</div>
-      <div>
-        <button id="enter">ENTER</button>
-        ${renderRow(lettersRow3)}
-        <button id="delete">⌫</button>
-      </div>
-    `;
+        <div class="d-flex alphabetRow">${renderRow(lettersRow1)}</div>
+        <div class="d-flex alphabetRow">${renderRow(lettersRow2)} ${language === "ES" ? `<button class="alphabetCell d-flex btn btn-secondary ${alphabetMap["Ñ"] || ""}" data-key="Ñ">Ñ</button>` : ""}</div>
+        <div class="d-flex alphabetRow">
+            <button class="alphabetCell d-flex btn btn-secondary" id="enter">ENTER</button>
+            ${renderRow(lettersRow3)}
+            <button class="alphabetCell d-flex btn btn-secondary" id="delete">⌫</button>
+        </div>
+        `;
 
         // bind
         el.keyboard.querySelectorAll("[data-key]").forEach((btn) => {

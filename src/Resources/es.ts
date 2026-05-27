@@ -143,5 +143,30 @@ export const es = {
       description: "Título de Bioingeniero de la Universidad Autonoma de Baja California (UABC)",
       date: "Graduado el 30 de abril 2021"
     }
+  },
+  projects: {
+    back: "Atras",
+    tiktok: {
+      goToUrl: "Ir al URL",
+      copyUrl: "Copiar URL",
+      search: "Buscar",
+      placeholder: "Inserte un URL de TikTok"
+    },
+    timer: {
+      start: "Iniciar",
+      stop: "Detener",
+      phase1: "Fase 1",
+      phase2: "Fase 2",
+      offset: "Offset",
+      counter: "Contador",
+      cycles: "Ciclos",
+      waiting: "Esperando..."
+    },
+    wordle: {
+      language: "Idioma",
+      english: "Inglés",
+      spanish: "Español",
+      length: "Longitud"
+    }
   }
 };

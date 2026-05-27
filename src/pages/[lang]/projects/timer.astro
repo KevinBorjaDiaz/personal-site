@@ -13,154 +13,44 @@ const t = { en, es }[lang];
 
 <BaseLayout lang={lang} t={t}>
   <section class="container">
-    <a href={`/${lang}/projects`} class="back-btn">← Back</a>
+    <a href={`/${lang}/projects`} class="back-btn">← {t.projects.back}</a>
 
-    <h1>Counter: <span id="counter">0</span></h1>
+    <h1>{t.projects.timer.counter}: <span id="counter">0</span></h1>
 
     <div class="grid">
       <div class="field small">
-        <label>Phase 1</label>
+        <label>{t.projects.timer.phase1}</label>
         <input id="time1" type="number" />
       </div>
 
       <div class="field small">
-        <label>Phase 2</label>
+        <label>{t.projects.timer.phase2}</label>
         <input id="time2" type="number" />
       </div>
 
       <div class="field small">
-        <label>Cycles</label>
+        <label>{t.projects.timer.cycles}</label>
         <input id="cycles" type="number" />
       </div>
 
       <div class="field small">
-        <label>Offset</label>
+        <label>{t.projects.timer.offset}</label>
         <input id="offset" type="number" />
       </div>
     </div>
 
-    <button id="startBtn">Start</button>
+    <button id="startBtn">{t.projects.timer.start}</button>
 
     <div class="info">
       <h3 id="time">0</h3>
-      <h3 id="phase">Phase 1</h3>
+      <h3 id="phase">{t.projects.timer.phase1}</h3>
     </div>
   </section>
 </BaseLayout>
 
-<script>
-  let time1: number, time2: number, cycles: number, offset: number;
-  let waiting = false;
-
-  const phase1 = "Phase 1";
-  const phase2 = "Phase 2";
-
-  let time = 0;
-  let counter = 0;
-  let currentPhase = phase1;
-
-  let startTime = 0;
-  let running = false;
-
-  const el = {
-    time1: document.getElementById("time1") as HTMLInputElement,
-    time2: document.getElementById("time2") as HTMLInputElement,
-    cycles: document.getElementById("cycles") as HTMLInputElement,
-    offset: document.getElementById("offset") as HTMLInputElement,
-    counter: document.getElementById("counter") as HTMLElement,
-    time: document.getElementById("time") as HTMLElement,
-    phase: document.getElementById("phase") as HTMLElement,
-    btn: document.getElementById("startBtn") as HTMLButtonElement,
-  };
-
-  function updateUI() {
-    el.counter.textContent = String(counter);
-    el.time.textContent = waiting ? "Waiting..." : time.toFixed(2);
-    el.phase.textContent = currentPhase;
-    el.btn.textContent = running ? "Stop" : "Start";
-  }
-
-  function beep() {
-    const audio = new Audio("/beep.m4a");
-    audio.play().catch(() => {});
-  }
-
-  function startPhase() {
-    startTime = performance.now();
-    running = true;
-    loop();
-  }
-
-  function loop() {
-    if (!running) return;
-
-    const now = performance.now();
-    const elapsed= now - startTime;
-
-    const limit = currentPhase === phase1 ? time1 || 0 : time2 || 0;
-
-    time = elapsed / 1000;
-    updateUI();
-
-    if (elapsed >= limit * 1000) {
-      beep();
-
-      if (currentPhase === phase1) {
-        currentPhase = phase2;
-      } else if (cycles && counter === cycles - 1) {
-        counter++;
-        stop();
-        return;
-      } else {
-        counter++;
-        startCycle();
-        return;
-      }
-
-      startPhase();
-      return;
-    }
-
-    requestAnimationFrame(loop);
-  }
-
-  function stop() {
-    running = false;
-    updateUI();
-  }
-
-  async function startCycle() {
-    running = false;
-
-    if (offset) {
-      waiting = true;
-      updateUI();
-
-      await new Promise((r) => setTimeout(r, offset * 1000));
-
-      beep();
-      waiting = false;
-    }
-
-    currentPhase = phase1;
-    startPhase();
-  }
-
-  function start() {
-    time1 = Number(el.time1.value);
-    time2 = Number(el.time2.value);
-    cycles = Number(el.cycles.value);
-    offset = Number(el.offset.value);
-
-    if (!time1 || !time2) return;
-
-    counter = 0;
-    startCycle();
-  }
-
-  el.btn.addEventListener("click", () => {
-    running ? stop() : start();
-  });
+<script type="module" define:vars={{ t }}>
+  import { createTimer } from "/src/utils/timer/timer.js";
+  createTimer(t);
 </script>
 
 <style>

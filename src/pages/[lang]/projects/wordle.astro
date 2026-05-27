@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import "../../../styles/wordle.css";
 import { en, es } from "../../../Resources";
 import type { Language } from "../../../types/language.type";
 
@@ -12,7 +13,8 @@ const t = { en, es }[lang];
 ---
 
 <BaseLayout lang={lang} t={t}>
-  <section class="wordle">
+  <section class="d-flex column container">
+    <a href={`/${lang}/projects`} class="back-btn">← {t.projects.back}</a>
     <div id="game"></div>
 
     <p id="error" class="error"></p>
@@ -20,13 +22,13 @@ const t = { en, es }[lang];
     <div id="keyboard"></div>
 
     <div class="controls">
-      <label>Language:</label>
+      <label>{t.projects.wordle.language}:</label>
       <select id="language">
-        <option value="EN">English</option>
-        <option value="ES">Español</option>
+        <option value="EN">{t.projects.wordle.english}</option>
+        <option value="ES">{t.projects.wordle.spanish}</option>
       </select>
 
-      <label>Length:</label>
+      <label>{t.projects.wordle.length}:</label>
       <select id="length">
         <option value="5">5</option>
         <option value="7">7</option>
