@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { en, es } from "../../../Resources";
+import type { Language } from "../../../types/language.type";
+
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+
+const lang = Astro.params.lang as Language;
+const t = { en, es }[lang];
+---
+
+<BaseLayout lang={lang} t={t}>
+  <section class="wordle">
+    <div id="game"></div>
+
+    <p id="error" class="error"></p>
+
+    <div id="keyboard"></div>
+
+    <div class="controls">
+      <label>Language:</label>
+      <select id="language">
+        <option value="EN">English</option>
+        <option value="ES">Español</option>
+      </select>
+
+      <label>Length:</label>
+      <select id="length">
+        <option value="5">5</option>
+        <option value="7">7</option>
+      </select>
+    </div>
+  </section>
+</BaseLayout>
+
+<script type="module" src="/src/utils/wordle/game.js"></script>

@@ -1,0 +1,150 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { en, es } from "../../../Resources";
+import type { Language } from "../../../types/language.type";
+
+export async function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}
+
+const lang = Astro.params.lang as Language;
+const t = { en, es }[lang];
+---
+
+<BaseLayout lang={lang} t={t}>
+  <a href={`/${lang}/projects`} class="back-btn">← Back</a>
+  <section class="container">
+    <div id="error" class="error hidden"></div>
+
+    <form id="form">
+      <input
+        type="text"
+        placeholder="Insert TikTok URL"
+        id="tiktokURL"
+        autocomplete="off"
+      />
+      <button type="submit">Go</button>
+    </form>
+
+    <blockquote>
+      <iframe
+        id="iframe"
+        width="100%"
+        height="575"
+        frameborder="0"
+        allowfullscreen
+        class="hidden"></iframe>
+
+      <button id="copyBtn" class="btn hidden">Copy URL</button>
+
+      <a id="goLink" target="_blank" class="hidden">
+        <button class="btn">Go to URL</button>
+      </a>
+    </blockquote>
+  </section>
+</BaseLayout>
+
+<script>
+  
+  const el = {
+    input: document.getElementById("tiktokURL") as HTMLInputElement,
+    form: document.getElementById("form") as HTMLElement,
+    iframe: document.getElementById("iframe") as HTMLIFrameElement,
+    error: document.getElementById("error") as HTMLElement,
+    copyBtn: document.getElementById("copyBtn") as HTMLButtonElement,
+    goLink: document.getElementById("goLink") as HTMLAnchorElement,
+  };
+
+  let strURL: string | null = null;
+
+  el.form.addEventListener("submit", async (e: Event) => {
+    e.preventDefault();
+    const text = el.input.value.trim();
+    const resolved = await callApiForMobileURL(text);
+    validateText(resolved);
+  });
+
+  el.input.addEventListener("paste", async (e: ClipboardEvent) => {
+    const text = e.clipboardData?.getData("text").trim() || "";
+    const resolved = await callApiForMobileURL(text);
+    validateText(resolved);
+  });
+
+  function validateText(text: string | null) {
+    if (!text) {
+      setView("TikTok URL not accessible or restricted", false, "");
+      return;
+    }
+    prepareURL(text);
+  }
+
+  function setView(
+    errorMsg: string | null,
+    showBtns: boolean,
+    url: string | null,
+  ) {
+    strURL = url;
+
+    el.error.textContent = errorMsg || "";
+    el.error.classList.toggle("hidden", !errorMsg);
+
+    el.copyBtn.classList.toggle("hidden", !showBtns);
+    el.goLink.classList.toggle("hidden", !showBtns);
+    el.iframe.classList.toggle("hidden", !showBtns);
+  }
+
+  function prepareURL(text: string) {
+    try {
+      const parsed = new URL(text);
+      const paths = parsed.pathname.split("/");
+
+      if (paths.length >= 4) {
+        const videoID = paths[3];
+        const finalURL = `https://www.tiktok.com/embed/${videoID}`;
+
+        el.iframe.src = finalURL;
+        el.goLink.href = finalURL;
+
+        setView(null, true, finalURL);
+        return;
+      }
+    } catch {}
+
+    setView("TikTok URL not accessible or restricted", false, "");
+  }
+
+  async function callApiForMobileURL(text: string) {
+    const url = `https://www.tiktok.com/oembed?url=${text}`;
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error();
+
+      const data = await res.json();
+      return `${data.author_url}/v/${data.embed_product_id}`;
+    } catch {
+      return null;
+    }
+  }
+
+  el.copyBtn.addEventListener("click", () => {
+    if (strURL) navigator.clipboard.writeText(strURL);
+  });
+</script>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .error {
+    color: red;
+  }
+</style>

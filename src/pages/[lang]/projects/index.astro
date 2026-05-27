@@ -1,0 +1,50 @@
+---
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { en, es } from "../../../Resources";
+import type { Language } from "../../../types/language.type";
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: "en" } },
+    { params: { lang: "es" } },
+  ];
+}
+
+const lang = Astro.params.lang as Language;
+const t = { en, es }[lang];
+---
+
+<BaseLayout lang={lang} t={t}>
+  <section class="projects">
+    <div class="container">
+      <h1>Projects</h1>
+
+      <ul class="projects-list">
+        <li><a href={`/${lang}/projects/wordle`}>Wordle</a></li>
+        <li><a href={`/${lang}/projects/timer`}>Timer</a></li>
+        <li><a href={`/${lang}/projects/tiktok`}>Tikitak</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .projects-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .projects-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .projects-list a {
+    color: var(--link);
+    text-decoration: none;
+  }
+
+  .projects-list a:hover {
+    color: var(--accent);
+  }
+</style>
