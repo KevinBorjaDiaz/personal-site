@@ -19,13 +19,20 @@ const languages = [
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Kevin Borja Diaz</title>
+
+
+    <script is:inline>
+      const theme = localStorage.getItem("theme") || "dark";
+
+      document.documentElement.setAttribute("data-theme", theme);
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
 
-  <body style="width:100%; margin:0">
-    <Navbar t={t} />
+  <body class="preload" style="width:100%; margin:0">
+    <Navbar t={t} lang={lang} />
     <main>
       
       <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
@@ -58,6 +65,10 @@ const languages = [
       window.location.pathname = newPath;
     });
     //------------------------ END LANG CHANGE LOGIC---------------------------
+
+    window.addEventListener("load", () => {
+      document.body.classList.remove("preload");
+    });
   </script>
 </html>
 

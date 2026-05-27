@@ -1,6 +1,5 @@
 ---
-const { t } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const { t, lang } = Astro.props;
 ---
 
 <nav class="nav">
@@ -10,19 +9,19 @@ const base = import.meta.env.BASE_URL;
     <button class="menu-btn" id="menu-btn">☰</button>
 
     <div class="links" id="nav-links">
-      <a data-section="#home" href="/#home">{t.nav.home}</a>
-      <a data-section="#experience" href="/#experience">{t.nav.experience}</a>
-      <a data-section="#skills" href="/#skills">{t.nav.skills}</a>
-      <a data-section="#certifications" href="/#certifications">{t.nav.certifications}</a>
-      <a data-section="#aboutMe" href="/#aboutMe">{t.nav.about}</a>
-      <!-- <a data-section="#contact" href="/#contact">{t.nav.contact}</a> -->
+      <a data-section="#home" href=`/${lang}/#home`>{t.nav.home}</a>
+      <a data-section="#experience" href=`/${lang}/#experience`>{t.nav.experience}</a>
+      <a data-section="#skills" href=`/${lang}/#skills`>{t.nav.skills}</a>
+      <a data-section="#certifications" href=`/${lang}/#certifications`>{t.nav.certifications}</a>
+      <a data-section="#aboutMe" href=`/${lang}/#aboutMe`>{t.nav.about}</a>
+      <!-- <a data-section="#contact" href=`/${lang}/#contact`>{t.nav.contact}</a> -->
     </div>
     
     <div class="text-center">
       <div>
-        <a href={`${base}es`}>ES</a>
+        <button type="button" id="lang-es">ES</button>
         <span>|</span>
-        <a href={`${base}en`}>EN</a>
+        <button type="button" id="lang-en">EN</button>
       </div>
       
       <div id="theme-toggle">
@@ -72,22 +71,34 @@ const base = import.meta.env.BASE_URL;
   //--------------------------- THEME LOGIC----------------------------------
   const checkbox = document.getElementById("chk") as HTMLInputElement;
 
-  const currentTheme = localStorage.getItem("theme");
-
-  if (currentTheme === "light") {
-    document.documentElement.setAttribute("data-theme", "light");
-    checkbox.checked = true;
-  }
-
+  checkbox.checked =
+    document.documentElement.getAttribute("data-theme") === "light";
+  
   checkbox?.addEventListener("change", () => {
-    const isLight = checkbox.checked;
-
-    const newTheme = isLight ? "light" : "dark";
+    const newTheme = checkbox.checked ? "light" : "dark";
 
     document.documentElement.setAttribute("data-theme", newTheme);
+
     localStorage.setItem("theme", newTheme);
   });
   //--------------------------- EMD THEME LOGIC-------------------------------
+
+  function changeLang(lang: string) {
+    const path = window.location.pathname;
+
+    const newPath = /^\/(es|en)/.test(path)
+      ? path.replace(/^\/(es|en)/, `/${lang}`)
+      : `/${lang}${path}`;
+
+    window.location.pathname = newPath;
+  }
+
+  document.getElementById("lang-es")
+    ?.addEventListener("click", () => changeLang("es"));
+
+  document.getElementById("lang-en")
+    ?.addEventListener("click", () => changeLang("en"));
+
 </script>
 
 <style>
@@ -306,4 +317,13 @@ const base = import.meta.env.BASE_URL;
     width: 1px !important;
     white-space: nowrap !important;
   }
+
+  #lang-es, #lang-en {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+  }
+
 </style>

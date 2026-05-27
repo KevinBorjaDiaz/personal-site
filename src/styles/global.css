@@ -55,6 +55,11 @@ a {
     text-decoration: none;
 }
 
+section {
+    padding: 3rem 1rem 0 1rem;
+    width: 100%
+}
+
 .btn {
     display: inline-block;
     padding: 1rem 1.5rem;
@@ -150,9 +155,8 @@ a {
   padding: 0 1rem;
 }
 
-section {
-    padding: 3rem 1rem 0 1rem;
-    width: 100%
+.preload * {
+  transition: none !important;
 }
 
 @media (max-width: 768px) {
