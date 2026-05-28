@@ -19,14 +19,16 @@ const base = import.meta.env.BASE_URL;
     <div class="d-flex gap-2 end">
       <a href={`${base}${lang}/projects`} class="back-btn">← {t.projects.back}</a>
 
+      <div>
         <input
         type="text"
         placeholder={t.projects.tiktok.placeholder}
         id="tiktokURL"
         autocomplete="off"
         />
-
-      <button id="goBtn" type="button" class="btn btn-secondary">{t.projects.tiktok.search}</button>
+        
+        <button id="goBtn" type="button" class="btn btn-secondary">{t.projects.tiktok.search}</button>
+      </div>
     </div>
     
     <blockquote>
@@ -171,7 +173,7 @@ const base = import.meta.env.BASE_URL;
 
   @media (max-width: 768px) {
     .end {
-        align-items: flex-start;
+      align-items: flex-start;
     }
   }
 </style>
