@@ -8,7 +8,7 @@ const { t } = Astro.props;
         <div class="gridContainer columns2">
             {t.certifications.certificationList.map((cert: Certificate) => (
                 <div>
-                    <a href={cert.file} target="_blank" class="cert-card">
+                    <a href={`${import.meta.env.BASE_URL}${cert.file.replace(/^\//, '')}`} target="_blank" class="cert-card">
                         <h3>{cert.title}</h3>
                         <p>{cert.description}</p>
                     </a>
