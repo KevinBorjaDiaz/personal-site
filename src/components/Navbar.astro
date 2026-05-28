@@ -1,5 +1,6 @@
 ---
 const { t, lang } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 
 <nav class="nav">
@@ -9,12 +10,12 @@ const { t, lang } = Astro.props;
     <button class="menu-btn" id="menu-btn">☰</button>
 
     <div class="links" id="nav-links">
-      <a data-section="#home" href=`/${lang}/#home`>{t.nav.home}</a>
-      <a data-section="#experience" href=`/${lang}/#experience`>{t.nav.experience}</a>
-      <a data-section="#skills" href=`/${lang}/#skills`>{t.nav.skills}</a>
-      <a data-section="#certifications" href=`/${lang}/#certifications`>{t.nav.certifications}</a>
-      <a data-section="#aboutMe" href=`/${lang}/#aboutMe`>{t.nav.about}</a>
-      <!-- <a data-section="#contact" href=`/${lang}/#contact`>{t.nav.contact}</a> -->
+      <a data-section="#home" href={`${base}${lang}/#home`}>{t.nav.home}</a>
+      <a data-section="#experience" href={`${base}${lang}/#experience`}>{t.nav.experience}</a>
+      <a data-section="#skills" href={`${base}${lang}/#skills`}>{t.nav.skills}</a>
+      <a data-section="#certifications" href={`${base}${lang}/#certifications`}>{t.nav.certifications}</a>
+      <a data-section="#aboutMe" href={`${base}${lang}/#aboutMe`}>{t.nav.about}</a>
+      <!-- <a data-section="#contact" href={`${base}${lang}/#contact`}>{t.nav.contact}</a> -->
     </div>
     
     <div class="text-center">
@@ -83,14 +84,16 @@ const { t, lang } = Astro.props;
   });
   //--------------------------- EMD THEME LOGIC-------------------------------
 
+  const base = import.meta.env.BASE_URL;
+
   function changeLang(lang: string) {
     const path = window.location.pathname;
 
-    const newPath = /^\/(es|en)/.test(path)
-      ? path.replace(/^\/(es|en)/, `/${lang}`)
-      : `/${lang}${path}`;
+    const cleanPath = path.replace(base, "/");
 
-    window.location.pathname = newPath;
+    const newPath = cleanPath.replace(/^\/(es|en)/, `/${lang}`);
+
+    window.location.pathname = `${base}${newPath.slice(1)}`;
   }
 
   document.getElementById("lang-es")

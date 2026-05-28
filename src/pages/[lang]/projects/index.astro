@@ -1,5 +1,4 @@
 ---
-
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { en, es } from "../../../Resources";
 import type { Language } from "../../../types/language.type";
@@ -11,6 +10,7 @@ export async function getStaticPaths() {
   ];
 }
 
+const base = import.meta.env.BASE_URL;
 const lang = Astro.params.lang as Language;
 const t = { en, es }[lang];
 ---
@@ -21,9 +21,9 @@ const t = { en, es }[lang];
       <h1>Projects</h1>
 
       <ul class="projects-list">
-        <li><a href={`/${lang}/projects/wordle`}>Wordle</a></li>
-        <li><a href={`/${lang}/projects/timer`}>Timer</a></li>
-        <li><a href={`/${lang}/projects/tiktok`}>Tikitak</a></li>
+        <li><a href={`${base}${lang}/projects/wordle`}>Wordle</a></li>
+        <li><a href={`${base}${lang}/projects/timer`}>Timer</a></li>
+        <li><a href={`${base}${lang}/projects/tiktok`}>Tikitak</a></li>
       </ul>
     </div>
   </section>

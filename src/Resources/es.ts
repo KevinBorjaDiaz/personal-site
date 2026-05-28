@@ -166,7 +166,9 @@ export const es = {
       language: "Idioma",
       english: "Inglés",
       spanish: "Español",
-      length: "Longitud"
+      length: "Longitud",
+      congratulations: "¡Felicidades! La palabra era",
+      gameover: "Fin del juego. La palabra era"
     }
   }
 };

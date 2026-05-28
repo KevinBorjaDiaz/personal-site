@@ -166,7 +166,9 @@ export const en = {
       language: "Language",
       english: "English",
       spanish: "Spanish",
-      length: "Length"
+      length: "Length",
+      congratulations: "Congratulations! The word was",
+      gameover: "Game Over. The word was"
     }
   }
 };

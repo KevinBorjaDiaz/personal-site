@@ -9,6 +9,7 @@ export async function getStaticPaths() {
 
 const lang = Astro.params.lang as Language;
 const t = { en, es }[lang];
+const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout lang={lang} t={t}>
 
@@ -16,7 +17,7 @@ const t = { en, es }[lang];
     <div id="error" class="error hidden errorBanner"></div>
     
     <div class="d-flex gap-2 end">
-      <a href={`/${lang}/projects`} class="back-btn">← {t.projects.back}</a>
+      <a href={`${base}${lang}/projects`} class="back-btn">← {t.projects.back}</a>
 
         <input
         type="text"

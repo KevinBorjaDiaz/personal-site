@@ -1,26 +1,25 @@
-
 .error {
     color: var(--bs-danger-text-emphasis);
 }
 
-.back-btn{
+.back-btn {
     width: 100%;
     text-align: left;
 }
 
-.correct{
+.correct {
     background-color: rgb(28, 126, 28);
 }
 
-.present{
+.present {
     background-color: rgb(233, 212, 28);
 }
 
-.absent{
+.absent {
     background-color: rgb(135, 160, 183);
 }
 
-.alphabetRow{
+.alphabetRow {
     width: 100%;
     gap: clamp(0px, 15px, 0.3vw);
 }
@@ -32,7 +31,7 @@
     flex-direction: column;
 }
 
-.alphabetCell{
+.alphabetCell {
     width: clamp(0px, 10%, 40px);
     height: 40px;
     font-size: clamp(12px, 0.2rem, 24px);
@@ -42,7 +41,7 @@
     justify-content: center;
 }
 
-.wordCell{
+.wordCell {
     height: clamp(35px, 8vw, 50px);
     width: clamp(35px, 8vw, 50px);
     margin: clamp(0px, 5px, 0.2em);
@@ -53,7 +52,7 @@
     font-size: 1.2em;
 }
 
-#enterButton{
+#enterButton {
     min-width: 80px;
 }
 
@@ -65,9 +64,7 @@
 }
 
 @media (max-width: 768px) {
-    
     .d-flex {
         flex-direction: row;
     }
-
 }
