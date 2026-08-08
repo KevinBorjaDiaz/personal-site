@@ -18,7 +18,7 @@ export const es = {
     FullStackDev: "Desarrollador Full Stack .NET"
   },
   experience: {
-    title: "Experience",
+    title: "Experiencia",
     spark: {
       role: "Desarrollador de Software",
       company: "Spark Technologies",
@@ -62,7 +62,9 @@ export const es = {
       "REST APIs",
       "Agile",
       "Scrum",
-      "LINQ"
+      "LINQ",
+      "JQuery",
+      "Bootstrap"
     ]
   },
   certifications: {
